@@ -10,6 +10,7 @@ export default async function handler(
         res.setHeader('Access-Control-Allow-Origin', '*'); // Allow CORS
         res.status(200).json(response.data);
     } catch (error) {
+        console.error('Error fetching data:', error);
         res.status(500).json({ error: 'Error fetching data' });
     }
 }

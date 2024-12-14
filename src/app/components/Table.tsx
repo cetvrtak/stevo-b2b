@@ -17,11 +17,6 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
   );
 
   useEffect(() => {
-    // Clear existing timeout
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout);
-    }
-
     // Set a new timeout for 1 second delay
     const timeout = setTimeout(() => {
       const filtered = data.filter((row) =>
@@ -44,6 +39,11 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
   }, [data, query, selectedColumns]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Clear existing timeout
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
     const value = e.target.value;
     setQuery(value);
   };

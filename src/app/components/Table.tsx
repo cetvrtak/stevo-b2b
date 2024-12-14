@@ -1,19 +1,18 @@
-import { useState } from 'react';
-import { Data, TableData } from '../types';
+import { useEffect, useState } from 'react';
+import { Row } from '../types';
 
-const Table: React.FC<Data> = (data) => {
-  const tableData: TableData = data.data;
+interface TableProps {
+  data: Row[];
+}
 
+const Table: React.FC<TableProps> = ({ data }) => {
   const [query, setQuery] = useState<string>('');
-  const [filteredData, setFilteredData] = useState<TableData>(tableData);
+  const [filteredData, setFilteredData] = useState<Row[]>([]);
   const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
     null
   );
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setQuery(value);
-
+  useEffect(() => {
     // Clear existing timeout
     if (debounceTimeout) {
       clearTimeout(debounceTimeout);
@@ -21,21 +20,26 @@ const Table: React.FC<Data> = (data) => {
 
     // Set a new timeout for 1 second delay
     const timeout = setTimeout(() => {
-      if (value.length >= 3) {
+      if (query.length >= 3) {
         // Filter the table data
-        const filtered = Object.values(tableData).filter((row) =>
+        const filtered = data.filter((row) =>
           Object.values(row).some((cell) =>
-            String(cell).toLowerCase().includes(value.toLowerCase())
+            String(cell).toLowerCase().includes(query.toLowerCase())
           )
         );
         setFilteredData(filtered);
       } else {
         // Reset to full data if search term is less than 3 characters
-        setFilteredData(tableData);
+        setFilteredData(data);
       }
     }, 1000);
 
     setDebounceTimeout(timeout);
+  }, [data, query]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setQuery(value);
   };
 
   return (
@@ -51,7 +55,7 @@ const Table: React.FC<Data> = (data) => {
       <table>
         <thead></thead>
         <tbody>
-          {Object.values(filteredData).map((row) => {
+          {filteredData.map((row) => {
             return (
               <tr key={row.id}>
                 {Object.values(row).map((cell, index) => {

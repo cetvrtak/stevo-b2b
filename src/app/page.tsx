@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Table from './components/Table';
+import { Row } from './types';
 
 const Home = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Row[]>([]);
 
   useEffect(() => {
     fetch('/api/sifre')

@@ -33,7 +33,7 @@ const ColumnSelection: React.FC<ColumnSelectionProps> = ({
               className={styles.columnSelectorCard}
               style={{ border: '1px solid red' }}
             >
-              {column}
+              {column.charAt(0).toLocaleUpperCase() + column.slice(1)}
             </div>
           ))}
       </div>
@@ -48,7 +48,7 @@ const ColumnSelection: React.FC<ColumnSelectionProps> = ({
               className={styles.columnSelectorCard}
               style={{ border: '1px solid green' }}
             >
-              {column}
+              {column.charAt(0).toLocaleUpperCase() + column.slice(1)}
             </div>
           ))}
       </div>

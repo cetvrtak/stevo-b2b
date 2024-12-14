@@ -67,7 +67,9 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
               {columns
                 .filter((column) => selectedColumns.includes(column))
                 .map((column) => (
-                  <th key={column}>{column}</th>
+                  <th key={column}>
+                    {column.charAt(0).toLocaleUpperCase() + column.slice(1)}
+                  </th>
                 ))}
             </tr>
           </thead>

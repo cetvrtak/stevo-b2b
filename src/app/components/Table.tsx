@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Row } from '../types';
+import Loader from './Loader';
 
 interface TableProps {
   data: Row[];
@@ -42,7 +43,9 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
     setQuery(value);
   };
 
-  return (
+  return filteredData.length === 0 ? (
+    <Loader />
+  ) : (
     <>
       <input
         type="text"

@@ -17,7 +17,9 @@ const ColumnSelection: React.FC<ColumnSelectionProps> = ({
     (col) => !selectedColumns.includes(col)
   );
 
-  return (
+  return selectedColumns.length === 0 ? (
+    ''
+  ) : (
     <div
       style={{
         position: 'fixed',

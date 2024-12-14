@@ -4,9 +4,10 @@ import { Row } from '../types';
 interface TableProps {
   data: Row[];
   selectedColumns: string[];
+  columns: string[];
 }
 
-const Table: React.FC<TableProps> = ({ data, selectedColumns }) => {
+const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
   const [query, setQuery] = useState<string>('');
   const [filteredData, setFilteredData] = useState<Row[]>([]);
   const [debounceTimeout, setDebounceTimeout] = useState<NodeJS.Timeout | null>(
@@ -54,17 +55,21 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns }) => {
       <table>
         <thead>
           <tr>
-            {selectedColumns.map((column) => (
-              <th key={column}>{column}</th>
-            ))}
+            {columns
+              .filter((column) => selectedColumns.includes(column))
+              .map((column) => (
+                <th key={column}>{column}</th>
+              ))}
           </tr>
         </thead>
         <tbody>
           {filteredData.map((row) => (
             <tr key={row.id}>
-              {selectedColumns.map((column) => (
-                <td key={`${row.id}-${column}`}>{row[column]}</td>
-              ))}
+              {columns
+                .filter((column) => selectedColumns.includes(column))
+                .map((column) => (
+                  <td key={`${row.id}-${column}`}>{row[column]}</td>
+                ))}
             </tr>
           ))}
         </tbody>

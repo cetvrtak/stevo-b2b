@@ -41,21 +41,23 @@ const ColumnSelection: React.FC<ColumnSelectionProps> = ({
         }}
       >
         <h3>Unselected Columns</h3>
-        {unselectedColumns.map((column) => (
-          <div
-            key={column}
-            onDoubleClick={() => onSelect(column)}
-            style={{
-              padding: '0.5rem',
-              border: '1px solid red',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              textAlign: 'center',
-            }}
-          >
-            {column}
-          </div>
-        ))}
+        {columns
+          .filter((column) => unselectedColumns.includes(column))
+          .map((column) => (
+            <div
+              key={column}
+              onDoubleClick={() => onSelect(column)}
+              style={{
+                padding: '0.5rem',
+                border: '1px solid red',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                textAlign: 'center',
+              }}
+            >
+              {column}
+            </div>
+          ))}
       </div>
       <div
         style={{
@@ -67,21 +69,23 @@ const ColumnSelection: React.FC<ColumnSelectionProps> = ({
         }}
       >
         <h3>Selected Columns</h3>
-        {selectedColumns.map((column) => (
-          <div
-            key={column}
-            onDoubleClick={() => onUnselect(column)}
-            style={{
-              padding: '0.5rem',
-              border: '1px solid green',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              textAlign: 'center',
-            }}
-          >
-            {column}
-          </div>
-        ))}
+        {columns
+          .filter((column) => selectedColumns.includes(column))
+          .map((column) => (
+            <div
+              key={column}
+              onDoubleClick={() => onUnselect(column)}
+              style={{
+                padding: '0.5rem',
+                border: '1px solid green',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                textAlign: 'center',
+              }}
+            >
+              {column}
+            </div>
+          ))}
       </div>
     </div>
   );

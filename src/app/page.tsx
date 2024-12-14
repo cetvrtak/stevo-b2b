@@ -35,7 +35,7 @@ const Home = () => {
 
   return (
     <>
-      <Table data={data} selectedColumns={selectedColumns} />
+      <Table data={data} selectedColumns={selectedColumns} columns={columns} />
       <ColumnSelection
         columns={columns}
         selectedColumns={selectedColumns}

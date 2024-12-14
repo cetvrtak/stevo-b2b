@@ -51,7 +51,7 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
   return filteredData.length === 0 ? (
     <Loader />
   ) : (
-    <section className={styles.tableContainer}>
+    <section className={styles.mainSection}>
       <input
         type="text"
         placeholder="Search..."
@@ -60,28 +60,30 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
         className={styles.search}
       />
 
-      <table>
-        <thead>
-          <tr>
-            {columns
-              .filter((column) => selectedColumns.includes(column))
-              .map((column) => (
-                <th key={column}>{column}</th>
-              ))}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((row) => (
-            <tr key={row.id}>
+      <div className={styles.tableContainer}>
+        <table>
+          <thead>
+            <tr>
               {columns
                 .filter((column) => selectedColumns.includes(column))
                 .map((column) => (
-                  <td key={`${row.id}-${column}`}>{row[column]}</td>
+                  <th key={column}>{column}</th>
                 ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredData.map((row) => (
+              <tr key={row.id}>
+                {columns
+                  .filter((column) => selectedColumns.includes(column))
+                  .map((column) => (
+                    <td key={`${row.id}-${column}`}>{row[column]}</td>
+                  ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </section>
   );
 };

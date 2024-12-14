@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import ColumnSelection from './components/ColumnSelection';
 import Table from './components/Table';
 import { Row } from './types';
+import styles from './page.module.css';
 
 const Home = () => {
   const [data, setData] = useState<Row[]>([]);
@@ -34,7 +35,7 @@ const Home = () => {
   };
 
   return (
-    <>
+    <main className={styles.main}>
       <Table data={data} selectedColumns={selectedColumns} columns={columns} />
       <ColumnSelection
         columns={columns}
@@ -42,7 +43,7 @@ const Home = () => {
         onSelect={handleSelect}
         onUnselect={handleUnselect}
       />
-    </>
+    </main>
   );
 };
 

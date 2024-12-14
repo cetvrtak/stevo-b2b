@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from '../page.module.css';
 
 const Loader: React.FC = () => {
   const [counter, setCounter] = useState<number>(0);
@@ -11,7 +12,11 @@ const Loader: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return <h2>{`Loading${String('.').repeat(counter % 4)}`}</h2>;
+  return (
+    <h2 className={styles.loader}>{`Loading${String('.').repeat(
+      counter % 4
+    )}`}</h2>
+  );
 };
 
 export default Loader;

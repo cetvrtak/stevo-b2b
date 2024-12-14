@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Row } from '../types';
 import Loader from './Loader';
+import styles from '../page.module.css';
 
 interface TableProps {
   data: Row[];
@@ -46,13 +47,13 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
   return filteredData.length === 0 ? (
     <Loader />
   ) : (
-    <>
+    <section className={styles.tableContainer}>
       <input
         type="text"
         placeholder="Search..."
         value={query}
         onChange={handleSearchChange}
-        style={{ marginBottom: '1rem', padding: '0.5rem' }}
+        className={styles.search}
       />
 
       <table>
@@ -77,7 +78,7 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
           ))}
         </tbody>
       </table>
-    </>
+    </section>
   );
 };
 

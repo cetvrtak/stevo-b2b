@@ -40,3 +40,24 @@ a {
     color-scheme: dark;
   }
 }
+
+table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+  background-color: #ededed;
+}
+
+th,
+td {
+  padding: 8px;
+  border: 1px solid #ededed;
+  text-wrap: nowrap;
+}
+
+th {
+  border-bottom: 5px solid #ededed;
+}

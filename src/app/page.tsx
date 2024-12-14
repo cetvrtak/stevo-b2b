@@ -23,7 +23,7 @@ const Home = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
-  useEffect(() => setSelectedColumns(columns), [columns]);
+  useEffect(() => setSelectedColumns(columns.slice(0, 5)), [columns]);
 
   const handleSelect = (column: string) => {
     setSelectedColumns((prev) => [...prev, column]);

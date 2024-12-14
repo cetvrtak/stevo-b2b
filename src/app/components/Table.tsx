@@ -33,6 +33,10 @@ const Table: React.FC<TableProps> = ({ data, selectedColumns, columns }) => {
         )
       );
 
+      if (query.length >= 3 && filtered.length === 0) {
+        alert('No results found');
+        return;
+      }
       setFilteredData(filtered);
     }, 1000);
 

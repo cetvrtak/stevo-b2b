@@ -31,6 +31,10 @@ const Home = () => {
   };
 
   const handleUnselect = (column: string) => {
+    if (selectedColumns.length === 1) {
+      alert('At least one column needs to be selected');
+      return;
+    }
     setSelectedColumns((prev) => prev.filter((col) => col !== column));
   };
 
